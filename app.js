@@ -14,7 +14,8 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
-const UserRouter = require("./routes/user.js");
+const userRouter=require("./routes/user.js");
+app.use("/",userRouter);
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/wonderlust";
 
@@ -115,9 +116,9 @@ app.get(
   })
 );
 
-app.get("/singup",(req,res)=>{
-  res.send("form");
-});
+// app.get("/singup",(req,res)=>{
+//   res.send("form");
+// });
 
 // Create Route
 app.post(
