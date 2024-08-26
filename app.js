@@ -108,8 +108,8 @@ app.use("/", userRouter);
 
 
 // 404 Route Handler
-app.all("*", (req, res, next) => {
-    next(new ExpressError(404, "Page not found"));
+app.get("/", (req, res) => {
+    res.redirect("/listings");
 });
 
 // Error Handling Middleware
