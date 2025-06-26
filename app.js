@@ -1,4 +1,4 @@
- if(process.env.NODE_ENV != "production"){
+if(process.env.NODE_ENV != "production"){
     require("dotenv").config();
  }
 
@@ -74,9 +74,9 @@ mongoose.connect(dburl)
     })
 
 // Route Handlers
-// app.get("/", (req, res) => {
-//     res.send("root is working");
-// });
+app.get("/", (req, res) => {
+    res.redirect("/listings");
+});
 
 
 app.use(session(sessionOptions));
@@ -120,7 +120,7 @@ app.use((err, req, res, next) => {
 });
 
 // Starting the Server
-const PORT = 8080;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
 });
