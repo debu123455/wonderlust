@@ -1,0 +1,55 @@
+/* Airbnb Listing Form Custom Styles */
+.airbnb-form-card {
+  background: linear-gradient(120deg, #fff 70%, #ffe5e7 100%);
+  border: 1.5px solid #fe424d22;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 24px #fe424d11;
+  margin-top: 2rem;
+}
+
+.airbnb-form-title {
+  color: #fe424d;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 0 #fff, 2px 2px 4px #fe424d22;
+}
+
+.airbnb-input {
+  border-radius: 1.2rem !important;
+  border: 1.5px solid #fe424d44 !important;
+  box-shadow: 0 1px 4px #fe424d11;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.airbnb-input:focus {
+  border: 2px solid #fe424d !important;
+  box-shadow: 0 2px 8px #fe424d22;
+}
+
+.airbnb-btn-add {
+  background: linear-gradient(90deg, #fe424d 60%, #ff7e8b 100%);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 2rem;
+  padding: 0.7rem 0;
+  font-size: 1.1rem;
+  border: none;
+  box-shadow: 0 2px 8px #fe424d22;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.airbnb-btn-add:hover {
+  background: linear-gradient(90deg, #d7373f 60%, #ff7e8b 100%);
+  color: #fff;
+  box-shadow: 0 4px 16px #fe424d33;
+}
+
+@media (max-width: 767.98px) {
+  .airbnb-form-card {
+    padding: 1.2rem !important;
+    border-radius: 1rem;
+  }
+  .airbnb-form-title {
+    font-size: 1.2rem;
+  }
+}

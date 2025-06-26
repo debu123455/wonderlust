@@ -39,10 +39,11 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 const dburl = process.env.ATLASDB_URL;
 
+
 const store = MongoStore.create({
     mongoUrl: dburl,
     crypto:{
-        secret: "mysupersecretstring",
+        secret:process.env.SECRET,
         
     },
     touchAfter: 24 * 3600, // 1 day
@@ -50,7 +51,7 @@ const store = MongoStore.create({
 
 const sessionOptions = {
     store,
-    secret: "mysupersecretstring",
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {

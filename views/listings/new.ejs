@@ -1,50 +1,51 @@
 <%- layout("/layouts/boilerplate.ejs") %>
 
-    <div class="row">
-        <div class="col-8 offset-2">
-            <br><br>
-            <h3>Create a New Listing</h3>
-            <form action="/listings" method="POST" class="needs-validation" novalidate  enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="title" class="form-label">Title</label>
-                    <input type="text" name="listing[title]" placeholder="Add a catchy title" class="form-control"
-                        required>
-                    <div class="valid-feedback">Title looks Good</div>
-                </div>
-                <div class="mb-3">
-                    <label for="description" class="form-label">Description</label>
-                    <textarea name="listing[description]" id="description" class="form-control" required></textarea>
-                    <div class="invalid-feedback">Plz enter short description</div>
-                </div>
-               
-                <div class="mb-3">
-                    <label for="image" class="form-label">choose image</label>
-                    <input type="file" name="listing[image]"  
-                    class="form-control"/>
-                    required
-                </div>
-                <br>
-                <div class="row">
-                    <div class="mb-3 col-md-4">
-                        <label for="price" class="form-label">Price</label>
-                        <input name="listing[price]" placeholder="1200" class="form-control" required>
-                        <div class="invalid-feedback">price should be valid</div>
-                    </div>
-                    <div class="mb-3 col-md-8">
-                        <label for="country" class="form-label">Country</label>
-                        <input type="text" name="listing[country]" placeholder="India" class="form-control" required>
-                        <div class="invalid-feedback">Plz enter the country name</div>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="location" class="form-label">Location</label>
-                    <input type="text" name="listing[location]" placeholder="Jaipur, Rajasthan" class="form-control"
-                        required>
-                    <div class="invalid-feedback">Plz enter the location name</div>
-                </div>
-                <br><br>
-                <button class="btn btn-dark add-btn" type="submit">Add</button>
-                <br><br>
-            </form>
+<link rel="stylesheet" href="/css/airbnb-form.css">
+<div class="row justify-content-center align-items-center min-vh-100">
+  <div class="col-lg-7 col-md-9 col-12">
+    <div class="airbnb-form-card shadow-lg p-4 rounded-4 bg-white">
+      <h2 class="mb-4 text-center airbnb-form-title">
+        <i class="fa-solid fa-house-chimney-window me-2" style="color:#fe424d;"></i>
+        Create a New Listing
+      </h2>
+      <form action="/listings" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" name="listing[title]" placeholder="Add a catchy title" class="form-control airbnb-input" required>
+          <div class="valid-feedback">Title looks Good</div>
         </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea name="listing[description]" id="description" class="form-control airbnb-input" required placeholder="Describe your place..."></textarea>
+          <div class="invalid-feedback">Please enter a short description</div>
+        </div>
+        <div class="mb-3">
+          <label for="image" class="form-label">Choose Image</label>
+          <input type="file" name="listing[image]" class="form-control airbnb-input" required accept="image/*" />
+        </div>
+        <div class="row">
+          <div class="mb-3 col-md-4">
+            <label for="price" class="form-label">Price</label>
+            <input name="listing[price]" placeholder="1200" class="form-control airbnb-input" required>
+            <div class="invalid-feedback">Price should be valid</div>
+          </div>
+          <div class="mb-3 col-md-8">
+            <label for="country" class="form-label">Country</label>
+            <input type="text" name="listing[country]" placeholder="India" class="form-control airbnb-input" required>
+            <div class="invalid-feedback">Please enter the country name</div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="location" class="form-label">Location</label>
+          <input type="text" name="listing[location]" placeholder="Jaipur, Rajasthan" class="form-control airbnb-input" required>
+          <div class="invalid-feedback">Please enter the location name</div>
+        </div>
+        <div class="d-grid mt-4">
+          <button class="btn airbnb-btn-add" type="submit">
+            <i class="fa-solid fa-plus me-2"></i>Add Listing
+          </button>
+        </div>
+      </form>
     </div>
+  </div>
+</div>

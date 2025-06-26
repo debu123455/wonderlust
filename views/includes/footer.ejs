@@ -1,14 +1,77 @@
 <footer>
-    <div class="f-info">
-        <div class="f-info-socials">
-            <i class="fa-brands fa-square-facebook"></i>
-            <i class="fa-brands fa-square-instagram"></i>
-            <i class="fa-brands fa-linkedin"></i>
-        </div>
-        <div class="f-info-brand"> &copy;Wanderust Private Limited</div>
-        <div class="f-info-links">
-            <a href="/privacy">Privacy</a>
-            <a href="/terms">Terms</a>
-        </div>
+  <div class="f-info-attractive">
+    <div class="f-info-socials mb-2">
+      <a href="#" class="f-social-link" title="Facebook"><i class="fa-brands fa-square-facebook"></i></a>
+      <a href="#" class="f-social-link" title="Instagram"><i class="fa-brands fa-square-instagram"></i></a>
+      <a href="#" class="f-social-link" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
     </div>
+    <div class="f-info-brand mb-2">&copy; <span style="color:#fe424d;font-weight:600;">Wanderlust</span> Private Limited</div>
+    <div class="f-info-links">
+      <a href="/privacy">Privacy</a>
+      <span class="f-dot">&middot;</span>
+      <a href="/terms">Terms</a>
+      <span class="f-dot">&middot;</span>
+      <a href="mailto:info@wanderlust.com">Contact</a>
+    </div>
+  </div>
+  <style>
+    .f-info-attractive {
+      background: linear-gradient(90deg, #fff 60%, #ffe5e7 100%);
+      border-top: 2px solid #fe424d22;
+      text-align: center;
+      padding: 2rem 0 1rem 0;
+      box-shadow: 0 -2px 8px #fe424d11;
+      font-size: 1.1rem;
+    }
+    .f-info-socials {
+      margin-bottom: 0.5rem;
+    }
+    .f-social-link {
+      color: #fe424d;
+      font-size: 1.7rem;
+      margin: 0 0.7rem;
+      transition: color 0.2s, transform 0.2s;
+      display: inline-block;
+    }
+    .f-social-link:hover {
+      color: #d7373f;
+      transform: scale(1.15) rotate(-5deg);
+    }
+    .f-info-brand {
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: #222;
+      font-size: 1.1rem;
+    }
+    .f-info-links {
+      margin-top: 0.5rem;
+    }
+    .f-info-links a {
+      text-decoration: none;
+      color: #fe424d;
+      margin: 0 0.5rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .f-info-links a:hover {
+      color: #d7373f;
+      text-decoration: underline;
+    }
+    .f-dot {
+      color: #fe424d44;
+      font-size: 1.2rem;
+      margin: 0 0.2rem;
+      vertical-align: middle;
+    }
+    @media (max-width: 575.98px) {
+      .f-info-attractive {
+        font-size: 0.95rem;
+        padding: 1.2rem 0 0.5rem 0;
+      }
+      .f-social-link {
+        font-size: 1.2rem;
+        margin: 0 0.3rem;
+      }
+    }
+  </style>
 </footer>

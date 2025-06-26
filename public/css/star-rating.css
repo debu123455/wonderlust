@@ -1,0 +1,21 @@
+/* Star display for reviews */
+.star-rating-view {
+  display: inline-block;
+  color: #fe424d;
+  font-size: 1.2rem;
+  letter-spacing: 0.1rem;
+  vertical-align: middle;
+  margin-bottom: 0.2rem;
+  animation: fadeIn 1s;
+}
+.star-rating-view .fa-star {
+  color: #fe424d;
+  text-shadow: 0 1px 2px #fe424d22;
+}
+.star-rating-view .fa-star-o {
+  color: #ccc;
+}
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}

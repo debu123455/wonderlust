@@ -9,15 +9,14 @@ const multer = require('multer');
 const{storage} = require("../cloudCONFIG.js")
 const upload = multer({ storage });
 
+// Add search support to GET / route
 router
 .route("/")
-     .get(wrapasync( listingcontroler.index))
-
-    .post( isLoggedIn,
-     upload.single('listing[image]'),
-     validateListing,
-     wrapasync(listingcontroler.createlisting));
-
+     .get(wrapasync(listingcontroler.index))
+     .post(isLoggedIn,
+         upload.single('listing[image]'),
+         validateListing,
+         wrapasync(listingcontroler.createlisting));
       
  
  router.get("/new", isLoggedIn,
@@ -48,3 +47,4 @@ router.get("/:id/edit", isLoggedIn, isOwner,
 
 
 module.exports = router;
+

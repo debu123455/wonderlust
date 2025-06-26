@@ -1,0 +1,51 @@
+/* Review Card Animations and Styles */
+.review-card {
+  border-radius: 1.2rem;
+  border: 1.5px solid #fe424d22;
+  background: #fff;
+  box-shadow: 0 2px 12px #fe424d11;
+  transition: box-shadow 0.3s, transform 0.3s;
+  animation: fadeInUp 0.7s cubic-bezier(.39,.575,.56,1.000) both;
+  margin-bottom: 1.5rem;
+}
+.review-card:hover {
+  box-shadow: 0 6px 24px #fe424d33;
+  transform: translateY(-2px) scale(1.01);
+}
+.review-card .card-title {
+  color: #fe424d;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+.review-card .starability-result {
+  color: #fe424d;
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  margin-top: 0.5rem;
+  animation: fadeIn 1.2s;
+}
+.review-card .btn-dark {
+  border-radius: 1.2rem;
+  background: linear-gradient(90deg, #fe424d 60%, #ff7e8b 100%);
+  color: #fff;
+  border: none;
+  font-weight: 500;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+  box-shadow: 0 2px 8px #fe424d22;
+}
+.review-card .btn-dark:hover {
+  background: linear-gradient(90deg, #d7373f 60%, #ff7e8b 100%);
+  color: #fff;
+  box-shadow: 0 4px 16px #fe424d33;
+  transform: scale(1.05);
+}
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
