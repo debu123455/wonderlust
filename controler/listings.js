@@ -40,17 +40,20 @@ module.exports.showListing = async (req, res) => {
 }
 
 module.exports.createlisting = async (req, res, next) => {
-    let url = req.file.path;
-    let filename = req.path.filename;
+    try {
+        let url = req.file ? req.file.path : 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80';
+        let filename = req.file ? req.file.filename : 'default.jpg';
 
-    const newListing = new Listing(req.body.listing);
-    newListing.image = { url, filename };
+        const newListing = new Listing(req.body.listing);
+        newListing.image = { url, filename };
+        newListing.owner = req.user._id;
 
-    newListing.owner = req.user._id;
-
-    await newListing.save();
-    req.flash("success", "New Listing Created");
-    res.redirect("/listings");
+        await newListing.save();
+        req.flash("success", "New Listing Created");
+        res.redirect("/listings");
+    } catch (err) {
+        next(err);
+    }
 }
 
 module.exports.edit = async (req, res) => {

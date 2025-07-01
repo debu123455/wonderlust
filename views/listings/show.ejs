@@ -2,42 +2,141 @@
 <link rel="stylesheet" href="/css/show-listing.css">
 <link rel="stylesheet" href="/css/review-card.css">
 <link rel="stylesheet" href="/css/star-rating.css">
-<div class="row mt-3">
-  <div class="col-8 offset-2">
-    <h3 class="offset-3 animate__animated animate__fadeInDown">
+<style>
+  /* Fully responsive show.ejs */
+  .show-main-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 2rem;
+    justify-content: center;
+  }
+  .show-main-col {
+    flex: 1 1 400px;
+    max-width: 600px;
+    min-width: 280px;
+    margin: 0 auto;
+  }
+  .show-card.listing-card {
+    width: 100% !important;
+    margin: 0 auto 1.5rem auto;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 4px 24px #6a82fb11, 0 1.5px 8px #ffe5f733;
+  }
+  .show-img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 1.5rem 1.5rem 0 0;
+  }
+  @media (max-width: 991.98px) {
+    .show-main-row {
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .show-img {
+      height: 200px;
+    }
+  }
+  @media (max-width: 767.98px) {
+    .show-main-col {
+      max-width: 98vw;
+      min-width: 0;
+      padding: 0 0.5rem;
+    }
+    .show-img {
+      height: 140px;
+    }
+    h3, h4 {
+      font-size: 1.2rem !important;
+      text-align: center;
+    }
+    .card-body, .review-card .card-body {
+      padding: 0.7rem 0.5rem !important;
+    }
+    .review-card {
+      min-width: 90vw;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+    .btns {
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+      margin-left: 0 !important;
+    }
+    .starability-slot label {
+      font-size: 1.1rem;
+    }
+    .form-label, textarea, .form-control {
+      font-size: 1rem !important;
+    }
+  }
+  @media (max-width: 575.98px) {
+    .show-img {
+      height: 90px;
+    }
+    .review-card {
+      min-width: 98vw;
+      font-size: 0.95rem;
+    }
+    .star-rating-view i {
+      font-size: 1.1rem;
+    }
+    .btn, .btn-sm {
+      font-size: 0.95rem;
+      padding: 0.3rem 0.7rem;
+    }
+  }
+  /* Make reviews scrollable horizontally on mobile */
+  .reviews-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+  @media (max-width: 767.98px) {
+    .reviews-row {
+      flex-wrap: nowrap;
+      gap: 0.7rem;
+    }
+    .review-card {
+      flex: 0 0 85vw;
+    }
+  }
+</style>
+<div class="show-main-row">
+  <div class="show-main-col">
+    <h3 class="animate__animated animate__fadeInDown" style="text-align:center;">
       <%= listing.title %>
     </h3>
-    <br>
-    <div>
-      <div class="card col-6 offset-3 show-card listing-card">
-        <img src="<%= listing.image.url%>" class="card-img-top show-img" alt="listing_image">
-        <div class="card-body">
-          <%if(listing.owner){%>
-            <p class="card-text"><i><b>Owner</b> : <%= listing.owner.username %></i></p>
-          <%}%>
-          <p class="card-text"><b>Description</b> : <%= listing.description %></p>
-          <p class="card-text"><b>Price</b> : &#8377 <%= listing.price.toLocaleString("en-IN") %></p>
-          <p class="card-text"><b>Location</b> : <%= listing.location %></p>
-          <p class="card-text"><b>Country</b> : <%= listing.country %></p>
-        </div>
-      </div>
-      <br>
-      <%if(listing.owner){%>
-        <%if((currUser) && listing.owner._id.equals(currUser._id)){%>
-          <div class="col-1 offset-3 btns">
-            <a href="/listings/<%= listing._id %>/edit" class="btn edit-btn">Edit</a>
-            <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST" style="display:inline;">
-              <button class="btn">Delete</button>
-            </form>
-          </div>
+    <div class="card show-card listing-card">
+      <img src="<%= listing.image.url%>" class="card-img-top show-img" alt="listing_image">
+      <div class="card-body">
+        <%if(listing.owner){%>
+          <p class="card-text"><i><b>Owner</b> : <%= listing.owner.username %></i></p>
         <%}%>
-      <%}%>
+        <p class="card-text"><b>Description</b> : <%= listing.description %></p>
+        <p class="card-text"><b>Price</b> : &#8377 <%= listing.price.toLocaleString("en-IN") %></p>
+        <p class="card-text"><b>Location</b> : <%= listing.location %></p>
+        <p class="card-text"><b>Country</b> : <%= listing.country %></p>
+      </div>
     </div>
+    <%if(listing.owner && currUser && listing.owner._id.equals(currUser._id)){%>
+      <div class="btns" style="justify-content:center;">
+        <a href="/listings/<%= listing._id %>/edit" class="btn edit-btn">Edit</a>
+        <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST" style="display:inline;">
+          <button class="btn">Delete</button>
+        </form>
+      </div>
+    <%}%>
   </div>
-  <div class="col-8 offset-3 mb-3">
+  <div class="show-main-col">
     <hr>
     <%if(currUser){%>
-      <h4 class="animate__animated animate__fadeInLeft">Leave a Review</h4>
+      <h4 class="animate__animated animate__fadeInLeft" style="text-align:center;">Leave a Review</h4>
       <form action="/listings/<%= listing.id %>/reviews" method="POST" novalidate class="needs-validation">
         <div class="mb-3 mt-3">
           <fieldset class="starability-slot">
@@ -59,12 +158,12 @@
           <textarea name="review[comment]" id="comment" cols="30" rows="5" class="form-control" required></textarea>
           <div class="invalid-feedback">Please add some comments for review</div>
         </div>
-        <button class="btn btn-outline-dark">Submit</button>
+        <button class="btn btn-outline-dark w-100">Submit</button>
       </form>
     <% } %>
     <hr>
-    <p><b>All Reviews</b></p>
-    <div class="row">
+    <p style="text-align:center;"><b>All Reviews</b></p>
+    <div class="reviews-row row">
       <% for(review of listing.reviews) {%>
         <div class="card col-5 ms-3 mb-3 review-card animate__animated animate__fadeInUp">
           <div class="card-body">
@@ -81,7 +180,7 @@
             <p class="card-text mt-2"><%= review.comment %></p>
           </div>
           <form action="/listings/<%= listing.id %>/reviews/<%= review._id %>?_method=DELETE" class="mb-3" method="POST">
-            <button class="btn btn-sm btn-dark">Delete</button>
+            <button class="btn btn-sm btn-dark w-100">Delete</button>
           </form>
         </div>
       <% } %>

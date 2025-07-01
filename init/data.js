@@ -348,6 +348,105 @@ const sampleListings = [
     location: "Costa Rica",
     country: "Costa Rica",
   },
+  {
+    title: "Trending Beachfront Villa",
+    description: "A stunning villa right on the beach, perfect for trending getaways.",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+    },
+    price: 18000,
+    location: "Goa",
+    country: "India",
+  },
+  {
+    title: "Cozy Room in Delhi",
+    description: "A comfortable private room in the heart of Delhi.",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=800&q=80",
+    },
+    price: 2500,
+    location: "Delhi",
+    country: "India",
+  },
+  {
+    title: "Iconic City Loft",
+    description: "Modern loft in Mumbai with city views.",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80",
+    },
+    price: 9000,
+    location: "Mumbai",
+    country: "India",
+  },
+  {
+    title: "Mountain Retreat in Manali",
+    description: "Peaceful retreat in the Himalayas with breathtaking views.",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=800&q=80",
+    },
+    price: 7000,
+    location: "Manali",
+    country: "India",
+  },
+  {
+    title: "Royal Castle Villa",
+    description: "Live like royalty in this grand castle-style villa.",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80",
+    },
+    price: 25000,
+    location: "Jaipur",
+    country: "India",
+  },
+  {
+    title: "Pool Paradise",
+    description: "Villa with an amazing infinity pool and luxury amenities.",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=800&q=80",
+    },
+    price: 16000,
+    location: "Lonavala",
+    country: "India",
+  },
+  {
+    title: "Arctic Igloo",
+    description: "Experience the magic of the Arctic in a cozy igloo.",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=800&q=80",
+    },
+    price: 30000,
+    location: "Arctic",
+    country: "Norway",
+  },
+  {
+    title: "Farm Stay in Punjab",
+    description: "Relax on a beautiful working farm with fresh air and animals.",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=800&q=80",
+    },
+    price: 3500,
+    location: "Punjab",
+    country: "India",
+  },
+  {
+    title: "Luxury Houseboat in Kerala",
+    description: "Stay on a luxury houseboat with all modern comforts.",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+    },
+    price: 12000,
+    location: "Kerala",
+    country: "India",
+  },
 ];
 
 module.exports = { data: sampleListings };

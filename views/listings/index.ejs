@@ -7,30 +7,170 @@
     justify-content: flex-start;
     gap: 1.5rem;
     margin-bottom: 1.5rem;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(6px);
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 24px #fe424d11, 0 1.5px 8px #fe424d22;
+    padding: 1.2rem 1.5rem 0.5rem 1.5rem;
   }
   .filter {
     text-align: center;
     min-width: 90px;
     margin-top: 1rem;
-    opacity: 0.7;
-    background: #fff;
+    opacity: 0.85;
+    background: rgba(255,255,255,0.97);
     border-radius: 1.2rem;
     box-shadow: 0 2px 8px #fe424d11;
-    padding: 0.7rem 1rem;
-    transition: box-shadow 0.2s, opacity 0.2s, background 0.2s;
+    padding: 0.9rem 1.1rem;
+    transition: box-shadow 0.22s, opacity 0.22s, background 0.22s, transform 0.18s;
     cursor: pointer;
+    border: 2px solid transparent;
+    position: relative;
   }
-  .filter:hover {
+  .filter:hover, .filter.active {
     opacity: 1;
-    background: #ffe5e7;
-    box-shadow: 0 4px 16px #fe424d22;
+    background: linear-gradient(90deg, #ffe5e7 60%, #fff 100%);
+    box-shadow: 0 6px 24px #fe424d22;
+    border: 2px solid #fe424d44;
+    transform: translateY(-3px) scale(1.04);
+  }
+  .filter div {
+    font-size: 1.7rem;
+    color: #fe424d;
+    filter: drop-shadow(0 2px 8px #fe424d22);
+    margin-bottom: 0.2rem;
+    transition: color 0.2s;
+  }
+  .filter:hover div {
+    color: #d7373f;
   }
   .filter p {
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     margin-bottom: 0;
     margin-top: 0.3rem;
-    font-weight: 500;
+    font-weight: 600;
     color: #fe424d;
+    letter-spacing: 0.5px;
+  }
+  .listing-link {
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.22s, transform 0.18s;
+    display: block;
+    height: 100%;
+  }
+  .listing-card {
+    border-radius: 1.5rem;
+    overflow: hidden;
+    margin: 1.2rem 0.5rem;
+    box-shadow: 0 4px 24px #fe424d11, 0 1.5px 8px #fe424d22;
+    border: 2px solid transparent;
+    background: rgba(255,255,255,0.97);
+    transition: box-shadow 0.22s, border 0.22s, transform 0.18s;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .listing-link:hover .listing-card {
+    box-shadow: 0 12px 32px #fe424d22, 0 2px 12px #fe424d33;
+    border: 2px solid #fe424d44;
+    transform: translateY(-6px) scale(1.025);
+    z-index: 2;
+  }
+  .card-img-top {
+    border-radius: 1.5rem 1.5rem 0 0;
+    object-fit: cover;
+    width: 100%;
+    height: 20rem;
+    transition: filter 0.2s;
+    filter: brightness(0.98) saturate(1.08);
+  }
+  .listing-link:hover .card-img-top {
+    filter: brightness(1.03) saturate(1.15);
+  }
+  .card-body {
+    padding: 1.1rem 1.2rem 1.2rem 1.2rem;
+    background: rgba(255,255,255,0.97);
+    border-radius: 0 0 1.5rem 1.5rem;
+    min-height: 7.5rem;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .card-text b {
+    font-size: 1.15rem;
+    color: #fe424d;
+    letter-spacing: 0.5px;
+  }
+  .btn-success {
+    background: linear-gradient(90deg, #fe424d 60%, #ffb86b 100%);
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 1.2rem;
+    box-shadow: 0 2px 8px #fe424d22;
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+  .btn-success:hover {
+    background: linear-gradient(90deg, #d7373f 60%, #ffb86b 100%);
+    box-shadow: 0 4px 16px #fe424d33;
+  }
+  @media (max-width: 1200px) {
+    .card-img-top {
+      height: 15rem;
+    }
+  }
+  @media (max-width: 991.98px) {
+    #filters {
+      gap: 0.7rem;
+      padding: 0.7rem 0.5rem 0.2rem 0.5rem;
+    }
+    .filter {
+      min-width: 70px;
+      padding: 0.7rem 0.7rem;
+    }
+    .card-img-top {
+      height: 13rem;
+    }
+    .card-body {
+      padding: 0.8rem 0.7rem 1rem 0.7rem;
+    }
+  }
+  @media (max-width: 767.98px) {
+    .row.row-cols-lg-3 {
+      flex-direction: column !important;
+    }
+    .listing-card {
+      margin: 1rem 0;
+    }
+    .card-img-top {
+      height: 10rem;
+    }
+    .card-body {
+      padding: 0.7rem 0.5rem 0.9rem 0.5rem;
+    }
+  }
+  @media (max-width: 575.98px) {
+    #filters {
+      gap: 0.4rem;
+      padding: 0.5rem 0.2rem 0.1rem 0.2rem;
+    }
+    .filter {
+      min-width: 60px;
+      padding: 0.5rem 0.5rem;
+      font-size: 0.9rem;
+    }
+    .card-img-top {
+      height: 7rem;
+    }
+    .card-body {
+      padding: 0.5rem 0.3rem 0.7rem 0.3rem;
+    }
+    .card-text b {
+      font-size: 1rem;
+    }
   }
 </style>
 
@@ -39,11 +179,10 @@
   <a href="/listings?q=room" class="filter"><div><i class="fa-solid fa-bed"></i></div><p>Rooms</p></a>
   <a href="/listings?q=city" class="filter"><div><i class="fa-solid fa-mountain-city"></i></div><p>Iconic cities</p></a>
   <a href="/listings?q=mountain" class="filter"><div><i class="fa-solid fa-mountain"></i></div><p>Mountains</p></a>
-  <a href="/listings?q=castle" class="filter"><div><i class="fa-brands fa-fort-awesome"></i></div><p>Castles</p></a>
+  <a href="/listings?q=castle" class="filter"><div><i class="fa-brands fa-fort-awesome"></i></div><p>Villa</p></a>
   <a href="/listings?q=pool" class="filter"><div><i class="fa-solid fa-person-swimming"></i></div><p>Amazing pools</p></a>
   <a href="/listings?q=arctic" class="filter"><div><i class="fa-regular fa-snowflake"></i></div><p>Arctic</p></a>
   <a href="/listings?q=farm" class="filter"><div><i class="fa-solid fa-cow"></i></div><p>Farms</p></a>
-  <a href="/listings?q=dome" class="filter"><div><i class="fa-solid fa-igloo"></i></div><p>Domes</p></a>
   <a href="/listings?q=boat" class="filter"><div><i class="fa-solid fa-ship"></i></div><p>Boats</p></a>
 </div>
 
@@ -51,7 +190,7 @@
   <% for(let listing of allListings){ %>
     <a href="/listings/<%= listing._id %>" class="listing-link">
       <div class="card col listing-card">
-        <img src="<%= listing.image.url %>" alt="listing_image" class="card-img-top" style="height: 20rem;">
+        <img src="<%= listing.image.url %>" alt="listing_image" class="card-img-top">
         <div class="card-img-overlay"></div>
         <div class="card-body">
           <p class="card-text">
