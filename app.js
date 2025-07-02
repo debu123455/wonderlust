@@ -129,7 +129,7 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render("error.ejs", { message: err.message || message });
 });
 
-const PORT = process.env.PORT || 4000; 
+const PORT = process.env.PORT || 10000; 
 const server = app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
 });
