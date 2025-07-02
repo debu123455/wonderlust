@@ -15,13 +15,21 @@
                         required><%= listing.description %></textarea>
                 </div>
 
-              
                 <div class="mb-3">
-                    <label for="image" class="form-label"> upload new Image </label>
-                    <input type="file"
-                     name="listing[image]" 
-                     class="form-control" >
-
+                    <label for="currentImage" class="form-label">Current Image</label><br>
+                    <% if (listing.image && listing.image.url) { %>
+                        <img src="<%= listing.image.url %>" alt="Current Image" style="max-width:200px;max-height:150px;" class="mb-2">
+                    <% } else { %>
+                        <span class="text-muted">No image available</span>
+                    <% } %>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Upload New Image</label>
+                    <input type="file" name="listing[image]" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="imgUrl" class="form-label">Or paste image URL</label>
+                    <input type="url" name="listing[imgUrl]" class="form-control" placeholder="https://example.com/image.jpg">
                 </div>
                 <div class="row">
                     <div class="mb-3 col-md-4">

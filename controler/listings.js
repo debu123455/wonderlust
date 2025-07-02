@@ -70,9 +70,18 @@ module.exports.updateform = async (req, res) => {
     let { id } = req.params;
     let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing }, { new: true });
 
-    if (typeof req.file !== "undefined") {
+    // Handle pasted image URL or file upload
+    if (req.body.listing && req.body.listing.imgUrl && req.body.listing.imgUrl.trim() !== "") {
+        // If a new image URL is provided, use it
+        listing.image = {
+            url: req.body.listing.imgUrl,
+            filename: 'external-url'
+        };
+        await listing.save();
+    } else if (typeof req.file !== "undefined" && req.file) {
+        // If a file is uploaded, use it
         let url = req.file.path;
-        let filename = req.path.filename;
+        let filename = req.file.filename;
         listing.image = { url, filename };
         await listing.save();
     }
