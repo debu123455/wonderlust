@@ -19,6 +19,8 @@
                     <label for="currentImage" class="form-label">Current Image</label><br>
                     <% if (listing.image && listing.image.url) { %>
                         <img src="<%= listing.image.url %>" alt="Current Image" style="max-width:200px;max-height:150px;" class="mb-2">
+                    <% } else if (listing.imgUrl) { %>
+                        <img src="<%= listing.imgUrl %>" alt="Current Image" style="max-width:200px;max-height:150px;" class="mb-2">
                     <% } else { %>
                         <span class="text-muted">No image available</span>
                     <% } %>
@@ -29,30 +31,25 @@
                 </div>
                 <div class="mb-3">
                     <label for="imgUrl" class="form-label">Or paste image URL</label>
-                    <input type="url" name="listing[imgUrl]" class="form-control" placeholder="https://example.com/image.jpg">
+                    <input type="url" name="listing[imgUrl]" class="form-control" placeholder="https://example.com/image.jpg" value="<%= listing.imgUrl ? listing.imgUrl : '' %>">
                 </div>
                 <div class="row">
                     <div class="mb-3 col-md-4">
                         <label for="price" class="form-label">Price</label>
                         <input type="number" name="listing[price]" value="<%= listing.price %>" class="form-control"
                             required>
-
                     </div>
                     <div class="mb-3 col-md-8">
                         <label for="country" class="form-label">Country</label>
-
                         <input type="text" name="listing[country]" value="<%= listing.country %>" class="form-control"
                             required>
-
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="location" class="form-label">Location</label>
-
                     <input type="text" name="listing[location]" value="<%= listing.location %>" class="form-control"
                         required>
                 </div>
-
                 <button class="btn btn-dark edit-btn mt-3">Edit</button>
             </form>
         </div>

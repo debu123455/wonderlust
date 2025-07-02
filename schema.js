@@ -5,9 +5,9 @@ const listingJoiSchema = Joi.object({
     description: Joi.string().default("").allow(null, ""),
     price: Joi.number().default(0).min(0),
     location: Joi.string().default("").allow(null, ""),
-    country: Joi.string().default("").allow(null, "")
+    country: Joi.string().default("").allow(null, ""),
+    imgUrl: Joi.string().uri().allow('', null), // allow image URL (optional)
 });
-
 module.exports = { listingJoiSchema };
 
 

@@ -30,7 +30,8 @@ app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "/public")));
 
 // Use only environment variable for dburl, fallback to localhost if not set
-const dburl = process.env.ATLASDB_URL || "mongodb+srv://devsharma45637:K3NUmiKMFLWIi3Ue@cluster0.erbfn.mongodb.net/wonderlust?retryWrites=true&w=majority&appName=Cluster0";
+const dburl = process.env.ATLASDB_URL ||
+    "mongodb+srv://devsharma45637:"
 
 mongoose.connect(dburl)
     .then(() => {
