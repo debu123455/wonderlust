@@ -75,66 +75,6 @@
   box-shadow: 0 2px 8px #ffb86b22;
 }
 
-/* Search bar outside navbar */
-.search-bar-outer {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  background: #e0f7fa;
-  padding: 1.1rem 0 0.7rem 0;
-  box-shadow: 0 2px 8px #ffe5f733;
-}
-.search-bar-wrap {
-  position: relative;
-  width: 350px;
-  max-width: 95vw;
-  display: flex;
-  gap: 0.5rem;
-}
-.search-inp {
-  border-radius: 25px;
-  padding: 0.5rem 3rem 0.5rem 2.2rem;
-  font-size: 1rem;
-  border: 1.5px solid #ffe5f7;
-  box-shadow: 0 2px 8px #ffe5f711;
-  background: #fff;
-  color: #6a82fb;
-  font-weight: 500;
-  transition: border 0.2s, box-shadow 0.2s;
-  width: 100%;
-  min-width: 0;
-}
-.search-inp:focus {
-  border: 2px solid #ffb86b;
-  outline: none;
-  box-shadow: 0 4px 16px #ffb86b22;
-}
-.search-icon-inp {
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #fe424d;
-  font-size: 1.1rem;
-  opacity: 0.7;
-}
-.search-btn {
-  background: linear-gradient(90deg, #ffb86b 60%, #fe424d 100%);
-  color: #fff;
-  border-radius: 25px;
-  padding: 0 1.2rem 0 1.2rem;
-  border: none;
-  font-weight: 600;
-  box-shadow: 0 2px 8px #ffb86b22;
-  transition: background 0.2s, box-shadow 0.2s;
-  flex-shrink: 0;
-}
-.search-btn:hover {
-  background: linear-gradient(90deg, #fe424d 60%, #ffb86b 100%);
-  color: #fff;
-  box-shadow: 0 4px 16px #fe424d33;
-}
-
 /* Responsive image and text for navbar */
 .navbar-brand {
   font-size: 1.7rem;
@@ -191,14 +131,6 @@
   }
   .navbar-nav .nav-link {
     margin-bottom: 0.5rem;
-  }
-  .search-bar-outer {
-    padding: 0.7rem 0 0.5rem 0;
-  }
-  .search-bar-wrap {
-    width: 100%;
-    max-width: 100vw;
-    gap: 0.4rem;
   }
 }
 @media (max-width: 700px) {
@@ -261,6 +193,64 @@
   padding: 0.2rem;
   box-shadow: 0 1px 4px #ffe5f722;
 }
+.search-inp {
+    border-radius: 25px;
+    padding: 0.5rem 2.2rem 0.5rem 2.2rem;
+    font-size: 1.05rem;
+    border: 2px solid #6a82fb;
+    box-shadow: 0 2px 8px #6a82fb22;
+    background: linear-gradient(90deg, #fffbe7 60%, #e0f7fa 100%);
+    color: #333;
+    font-weight: 500;
+    transition: border 0.2s, box-shadow 0.2s, background 0.2s;
+    width: 160px;
+    min-width: 0;
+    outline: none;
+    animation: fadeInDown 0.7s;
+  }
+  .search-inp:focus {
+    border: 2.5px solid #fe424d;
+    background: #fffbe7;
+    box-shadow: 0 4px 16px #fe424d22;
+  }
+  .form-select {
+    border-radius: 25px;
+    padding: 0.5rem 1.2rem;
+    font-size: 1.05rem;
+    border: 2px solid #ffb86b;
+    background: linear-gradient(90deg, #ffe5f7 60%, #e0f7fa 100%);
+    color: #fe424d;
+    font-weight: 500;
+    transition: border 0.2s, box-shadow 0.2s, background 0.2s;
+    outline: none;
+    animation: fadeInDown 0.7s 0.1s;
+  }
+  .form-select:focus {
+    border: 2.5px solid #6a82fb;
+    background: #fffbe7;
+    box-shadow: 0 4px 16px #6a82fb22;
+  }
+  .search-btn {
+    background: linear-gradient(90deg, #6a82fb 60%, #fe424d 100%);
+    color: #fff;
+    border-radius: 25px;
+    padding: 0.5rem 1.2rem;
+    border: none;
+    font-weight: 600;
+    box-shadow: 0 2px 8px #6a82fb22;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.18s;
+    animation: fadeInDown 0.7s 0.2s;
+  }
+  .search-btn:hover {
+    background: linear-gradient(90deg, #fe424d 60%, #6a82fb 100%);
+    color: #fff;
+    box-shadow: 0 4px 16px #fe424d33;
+    transform: translateY(-2px) scale(1.04);
+  }
+  @keyframes fadeInDown {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
 </style>
 
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
@@ -290,18 +280,17 @@
             <span class="user-icon"><i class="fa-regular fa-user"></i></span>
           <% } %>
         <% } %>
+        <!-- Search and Sort in Navbar -->
+        <form class="d-flex align-items-center ms-3" role="search" method="GET" action="/listings" style="gap:0.5rem;">
+          <input class="form-control search-inp" name="q" type="search" placeholder="Search destinations" style="width:160px;padding-left:2.2rem;" value="<%= typeof query !== 'undefined' && query.q ? query.q : '' %>" />
+          <select name="sort" class="form-select" style="width:auto;display:inline-block;" onchange="this.form.submit()">
+            <option value="">Sort by</option>
+            <option value="price_asc" <%= (typeof query !== 'undefined' && query.sort === 'price_asc') ? 'selected' : '' %>>Price: Low to High</option>
+            <option value="price_desc" <%= (typeof query !== 'undefined' && query.sort === 'price_desc') ? 'selected' : '' %>>Price: High to Low</option>
+          </select>
+          <button class="btn search-btn ms-2" type="submit">Search</button>
+        </form>
       </div>
     </div>
   </div>
 </nav>
-
-<!-- Search bar outside navbar -->
-<div class="search-bar-outer">
-  <form class="search-bar-wrap" role="search" method="GET" action="/listings">
-    <span class="search-icon-inp"><i class="fa-solid fa-magnifying-glass"></i></span>
-    <input class="form-control search-inp" name="q" type="search" placeholder="Search destinations" style="padding-left:2.2rem;" />
-    <button class="btn search-btn ms-2" type="submit">
-      Search
-    </button>
-  </form>
-</div>

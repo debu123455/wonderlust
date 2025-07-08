@@ -1,25 +1,26 @@
 const Listing = require("../models/listing");
 
-// Helper function to escape special characters in regex
-function escapeRegex(text) {
-    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-}
-
 module.exports.index = async (req, res) => {
-    const { q } = req.query;
+    const { q, sort } = req.query;
     let allListings;
+    let matchStage = {};
     if (q) {
-        const regex = new RegExp(escapeRegex(q), 'i'); // case-insensitive
-        allListings = await Listing.find({
+        const regex = new RegExp(q, 'i');
+        matchStage = {
             $or: [
                 { title: regex },
                 { location: regex }
             ]
-        });
-    } else {
-        allListings = await Listing.find({});
+        };
     }
-    res.render("listings/index.ejs", { allListings });
+    if (sort === 'price_asc') {
+        allListings = await Listing.find(matchStage).sort({ price: 1 });
+    } else if (sort === 'price_desc') {
+        allListings = await Listing.find(matchStage).sort({ price: -1 });
+    } else {
+        allListings = await Listing.find(matchStage);
+    }
+    res.render("listings/index.ejs", { allListings, query: { q, sort } });
 }
 
 module.exports.rendernewform = (req, res) => {
@@ -70,18 +71,9 @@ module.exports.updateform = async (req, res) => {
     let { id } = req.params;
     let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing }, { new: true });
 
-    // Handle pasted image URL or file upload
-    if (req.body.listing && req.body.listing.imgUrl && req.body.listing.imgUrl.trim() !== "") {
-        // If a new image URL is provided, use it
-        listing.image = {
-            url: req.body.listing.imgUrl,
-            filename: 'external-url'
-        };
-        await listing.save();
-    } else if (typeof req.file !== "undefined" && req.file) {
-        // If a file is uploaded, use it
+    if (typeof req.file !== "undefined") {
         let url = req.file.path;
-        let filename = req.file.filename;
+        let filename = req.path.filename;
         listing.image = { url, filename };
         await listing.save();
     }
