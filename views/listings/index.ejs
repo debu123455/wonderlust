@@ -351,7 +351,7 @@
     height: 1.7em;
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 100%;
     margin-left: -0.85em;
     margin-top: -0.85em;
     animation: spin 0.8s linear infinite;
@@ -453,9 +453,7 @@
                 <span class="btn-loader"></span>
               </button>
             </form>
-            <button class="btn btn-warning pay-btn w-100" data-listing-id="<%= listing._id %>">
-              <i class="fa-solid fa-credit-card"></i> Pay Now
-            </button>
+          
           </div>
           <!-- Payment Modal -->
           <div class="payment-modal" id="paymentModal-<%= listing._id %>" style="display:none;position:fixed;z-index:300;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.32);backdrop-filter:blur(2px);align-items:center;justify-content:center;">
@@ -492,8 +490,7 @@
 <!-- Floating Help & Care Center Button (fully animated, matches site style) -->
 <button class="help-care-btn" id="helpCareBtn" title="Help & Care Center" aria-label="Help & Care Center">
   <span class="help-btn-icon">
-    <i class="fa-solid fa-heart-circle-bolt"></i>
-    <span style="font-size:1.1rem;font-weight:600;margin-left:0.4em;letter-spacing:0.5px;">Help & Care Center</span>
+    <span style="font-size:1rem;font-weight:60;margin-left:0.3em;letter-spacing:0.6px;">Help & Care </span>
   </span>
 </button>
 
@@ -505,7 +502,7 @@
       <span class="help-modal-icon">
         <i class="fa-solid fa-heart-circle-bolt"></i>
       </span>
-      <h3>Help & Care Center</h3>
+      <h3>Help & Care </h3>
       <p>How can we help you?</p>
     </div>
     <div class="help-modal-links">
