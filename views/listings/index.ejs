@@ -71,12 +71,13 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    z-index: 1;
   }
   .listing-link:hover .listing-card {
     box-shadow: 0 12px 32px #fe424d22, 0 2px 12px #fe424d33;
     border: 2px solid #fe424d44;
     transform: translateY(-6px) scale(1.025);
-    z-index: 2;
+    z-index: 10;
   }
   .card-img-top {
     border-radius: 1.5rem 1.5rem 0 0;
@@ -117,63 +118,305 @@
     background: linear-gradient(90deg, #d7373f 60%, #ffb86b 100%);
     box-shadow: 0 4px 16px #fe424d33;
   }
-  @media (max-width: 1200px) {
-    .card-img-top {
-      height: 15rem;
+  /* Animated background shapes */
+  .animated-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .bg-shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.18;
+    filter: blur(12px);
+    animation: floatShape 12s infinite alternate ease-in-out;
+  }
+  .bg-shape1 { background: #fe424d; width: 220px; height: 220px; left: 5vw; top: 10vh; animation-delay: 0s; }
+  .bg-shape2 { background: #ffb86b; width: 160px; height: 160px; right: 8vw; top: 30vh; animation-delay: 2s; }
+  .bg-shape3 { background: #6be7ff; width: 120px; height: 120px; left: 40vw; bottom: 8vh; animation-delay: 4s; }
+  @keyframes floatShape {
+    0% { transform: translateY(0) scale(1); }
+    100% { transform: translateY(-40px) scale(1.08); }
+  }
+  /* Surprise Me button */
+  .surprise-btn {
+    position: fixed;
+    bottom: 2.5rem; right: 2.5rem;
+    z-index: 100;
+    background: linear-gradient(90deg, #fe424d 60%, #6be7ff 100%);
+    color: #fff;
+    border: none;
+    border-radius: 2rem;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0 4px 24px #fe424d33;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.18s;
+    animation: popIn 1s cubic-bezier(0.23, 1, 0.32, 1) 1.2s both;
+  }
+  .surprise-btn:hover {
+    background: linear-gradient(90deg, #6be7ff 60%, #fe424d 100%);
+    transform: scale(1.07);
+  }
+  /* Floating Help Care button - more animated */
+  .help-care-btn {
+    position: fixed;
+    bottom: 2.5rem; left: 2.5rem;
+    z-index: 100;
+    background: linear-gradient(135deg, #fff 60%, #6be7ff 100%);
+    color: #fe424d;
+    border: 2px solid #6be7ff44;
+    border-radius: 2rem;
+    min-width: 170px;
+    height: 56px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 24px #007bff22, 0 0 0 0 #6be7ff44;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.18s, box-shadow 0.3s;
+    animation: popIn 1s cubic-bezier(0.23, 1, 0.32, 1) 1.5s both, helpPulse 2.5s infinite alternate;
+    overflow: hidden;
+    padding: 0 1.2em;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .help-care-btn .help-btn-icon {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    animation: iconWiggle 2.5s infinite alternate;
+  }
+  .help-care-btn .fa-heart-circle-bolt {
+    color: #fe424d;
+    font-size: 1.7em;
+    filter: drop-shadow(0 2px 8px #fe424d22);
+    margin-right: 0.1em;
+    animation: heartPulse 1.8s infinite alternate;
+  }
+  @keyframes heartPulse {
+    0% { transform: scale(1); filter: drop-shadow(0 2px 8px #fe424d22); }
+    100% { transform: scale(1.13); filter: drop-shadow(0 6px 16px #fe424d44); }
+  }
+  @keyframes helpPulse {
+    0% { box-shadow: 0 4px 24px #007bff22, 0 0 0 0 #6be7ff44; }
+    100% { box-shadow: 0 4px 24px #007bff22, 0 0 0 16px #6be7ff22; }
+  }
+  @keyframes iconWiggle {
+    0% { transform: rotate(-6deg) scale(1); }
+    100% { transform: rotate(8deg) scale(1.08); }
+  }
+  .help-care-btn:hover {
+    background: linear-gradient(135deg, #6be7ff 60%, #fff 100%);
+    color: #fff;
+    transform: scale(1.08) rotate(-3deg);
+    box-shadow: 0 8px 32px #007bff44, 0 0 0 24px #6be7ff33;
+  }
+  .help-modal-content.animated-popIn {
+    animation: popIn 0.7s cubic-bezier(0.23,1,0.32,1);
+  }
+  @keyframes popIn {
+    0% { opacity: 0; transform: scale(0.7) translateY(60px); }
+    80% { opacity: 1; transform: scale(1.05) translateY(-8px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .help-modal-header .help-modal-icon {
+    animation: iconWiggle 2.5s infinite alternate;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.3em;
+  }
+  .help-modal-header .fa-heart-circle-bolt {
+    color: #fe424d;
+    font-size: 2.1rem;
+    filter: drop-shadow(0 2px 8px #fe424d22);
+    animation: heartPulse 1.8s infinite alternate;
+  }
+  .help-modal-header h3 {
+    margin:0.7rem 0 0.2rem 0;font-weight:700;color:#fe424d;
+  }
+  .help-modal-header p {
+    color:#555;font-size:1.08rem;margin-bottom:0.7rem;
+  }
+  .help-modal-links {
+    display:flex;flex-direction:column;gap:0.7rem;
+  }
+  .help-modal-links a {
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
+    text-decoration:none;
+    font-weight:600;
+    border-radius:1.2rem;
+    padding:0.7rem 1rem;
+    font-size:1.08rem;
+    transition:background 0.18s, color 0.18s, box-shadow 0.18s;
+    box-shadow: 0 2px 8px #fe424d11;
+    position: relative;
+    overflow: hidden;
+  }
+  .help-modal-links a[data-href*="booked"] {
+    color:#fe424d;background:#fff6f7;
+  }
+  .help-modal-links a[data-href="/listings"] {
+    color:#ffb86b;background:#fffaf3;
+  }
+  .help-modal-links a[href^="mailto"] {
+    color:#007bff;background:#f3faff;
+  }
+  .help-modal-links a[href^="https://wa.me"] {
+    color:#25d366;background:#f3fff6;
+  }
+  .help-modal-links a[href^="tel"] {
+    color:#00060c;background:#f3faff;
+  }
+  .help-modal-links a[data-href="/privacy"] {
+    color:#888;background:#f7f7f7;
+  }
+  .help-modal-links a[data-href="/terms"] {
+    color:#888;background:#f7f7f7;
+  }
+  .help-modal-links a:hover {
+    background: #eaf6ff;
+    color: #007bff;
+    box-shadow: 0 4px 16px #6be7ff22;
+    transform: translateY(-2px) scale(1.04);
+  }
+  .help-modal-links a i {
+    z-index: 1;
+    position: relative;
+    animation: iconBounce 1.2s infinite alternate;
+  }
+  @keyframes iconBounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-4px) scale(1.12); }
+  }
+  /* Animated Book Now button */
+  .animated-book-form {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+    display: flex;
+    justify-content: center;
+    pointer-events: all;
+    z-index: 2;
+  }
+  .btn-animated-book, .pay-btn {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.2rem !important;
+    font-weight: 600 !important;
+    font-size: 1.08rem !important;
+    box-shadow: 0 2px 8px #fe424d22;
+    margin-bottom: 0.3em;
+    margin-top: 0.2em;
+    padding: 0.8rem 1.2rem !important;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.18s;
+    animation: popIn 0.7s cubic-bezier(0.23,1,0.32,1);
+  }
+  .btn-animated-book:active, .pay-btn:active {
+    animation: btnBounce 0.3s;
+  }
+  @keyframes btnBounce {
+    0% { transform: scale(1); }
+    40% { transform: scale(0.92); }
+    100% { transform: scale(1.04); }
+  }
+  /* Ripple effect */
+  .ripple {
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+    background-color: rgba(255,255,255,0.5);
+    pointer-events: none;
+    z-index: 10;
+  }
+  @keyframes ripple {
+    to {
+      transform: scale(2.5);
+      opacity: 0;
     }
   }
-  @media (max-width: 991.98px) {
-    #filters {
-      gap: 0.7rem;
-      padding: 0.7rem 0.5rem 0.2rem 0.5rem;
-    }
-    .filter {
-      min-width: 70px;
-      padding: 0.7rem 0.7rem;
-    }
-    .card-img-top {
-      height: 13rem;
-    }
-    .card-body {
-      padding: 0.8rem 0.7rem 1rem 0.7rem;
-    }
+  .btn-animated-book .btn-loader {
+    display: block;
+    border: 3px solid #fff;
+    border-top: 3px solid #fe424d;
+    border-radius: 50%;
+    width: 1.7em;
+    height: 1.7em;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -0.85em;
+    margin-top: -0.85em;
+    animation: spin 0.8s linear infinite;
+    z-index: 3;
+    background: transparent;
   }
-  @media (max-width: 767.98px) {
-    .row.row-cols-lg-3 {
-      flex-direction: column !important;
-    }
-    .listing-card {
-      margin: 1rem 0;
-    }
-    .card-img-top {
-      height: 10rem;
-    }
-    .card-body {
-      padding: 0.7rem 0.5rem 0.9rem 0.5rem;
-    }
+  .btn-animated-book:not(.loading) .btn-loader {
+    display: none;
   }
-  @media (max-width: 575.98px) {
-    #filters {
-      gap: 0.4rem;
-      padding: 0.5rem 0.2rem 0.1rem 0.2rem;
-    }
-    .filter {
-      min-width: 60px;
-      padding: 0.5rem 0.5rem;
-      font-size: 0.9rem;
-    }
-    .card-img-top {
-      height: 7rem;
-    }
-    .card-body {
-      padding: 0.5rem 0.3rem 0.7rem 0.3rem;
-    }
-    .card-text b {
-      font-size: 1rem;
+  /* Payment Modal Animation */
+  .payment-modal {
+    animation: fadeIn 0.4s cubic-bezier(0.23,1,0.32,1);
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  /* Help & Care Center styles */
+  .help-modal-animated-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  .help-modal-animated-bg.show {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .listing-actions-row {
+    display: flex;
+    gap: 0.7em;
+    margin-top: 1.1em;
+    margin-bottom: 0.2em;
+  }
+  .listing-actions-row form,
+  .listing-actions-row .pay-btn {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+  @media (max-width: 600px) {
+    .listing-actions-row {
+      flex-direction: column;
+      gap: 0.5em;
     }
   }
 </style>
 
+<!-- Animated background shapes -->
+<div class="animated-bg">
+  <div class="bg-shape bg-shape1"></div>
+  <div class="bg-shape bg-shape2"></div>
+  <div class="bg-shape bg-shape3"></div>
+</div>
+
+<!-- Filters -->
 <div id="filters">
   <a href="/listings?q=trending" class="filter"><div><i class="fa-solid fa-fire"></i></div><p>Trending</p></a>
   <a href="/listings?q=room" class="filter"><div><i class="fa-solid fa-bed"></i></div><p>Rooms</p></a>
@@ -186,8 +429,9 @@
   <a href="/listings?q=boat" class="filter"><div><i class="fa-solid fa-ship"></i></div><p>Boats</p></a>
 </div>
 
+<!-- All Listings -->
 <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
-  <% for(let listing of allListings){ %>
+  <% for(let i=0; i<allListings.length; i++){ let listing = allListings[i]; %>
     <a href="/listings/<%= listing._id %>" class="listing-link">
       <div class="card col listing-card">
         <img src="<%= listing.image.url %>" alt="listing_image" class="card-img-top">
@@ -199,13 +443,176 @@
             <br>
             <span style="font-size:0.95rem;color:#888;">in <%= listing.location %>, <%= listing.country %></span>
           </p>
-          <form action="/listings/<%= listing._id %>/book" method="GET" class="mt-2">
-            <button class="btn btn-sm btn-success w-100" type="submit">
-              <i class="fa-solid fa-calendar-check me-1"></i>Book Now
+          <!-- Book & Pay Options Side-by-Side -->
+          <div class="listing-actions-row">
+            <form action="/listings/<%= listing._id %>/book" method="POST" class="animated-book-form book-form" data-listing-id="<%= listing._id %>">
+              <button class="btn btn-animated-book w-100" type="submit">
+                <span class="btn-bg"></span>
+                <span class="btn-icon"><i class="fa-solid fa-calendar-check"></i></span>
+                <span class="btn-label">Book Now</span>
+                <span class="btn-loader"></span>
+              </button>
+            </form>
+            <button class="btn btn-warning pay-btn w-100" data-listing-id="<%= listing._id %>">
+              <i class="fa-solid fa-credit-card"></i> Pay Now
             </button>
-          </form>
+          </div>
+          <!-- Payment Modal -->
+          <div class="payment-modal" id="paymentModal-<%= listing._id %>" style="display:none;position:fixed;z-index:300;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.32);backdrop-filter:blur(2px);align-items:center;justify-content:center;">
+            <div class="help-modal-content animated-popIn" style="max-width:400px;">
+              <button onclick="document.getElementById('paymentModal-<%= listing._id %>').style.display='none'" class="help-modal-close"><i class="fa-solid fa-xmark"></i></button>
+              <div class="help-modal-header">
+                <span class="help-modal-icon">
+                  <i class="fa-solid fa-credit-card"></i>
+                </span>
+                <h3>Payment for <%= listing.title %></h3>
+                <p>Enter your card details to pay <b>&#8377 <%= (listing.price !==null ? listing.price.toLocaleString('en-In') : 'N/A') %></b></p>
+              </div>
+              <form class="payment-form">
+                <input type="text" class="form-control mb-2" placeholder="Card Number" maxlength="19" required>
+                <div style="display:flex;gap:0.5em;">
+                  <input type="text" class="form-control mb-2" placeholder="MM/YY" maxlength="5" required>
+                  <input type="text" class="form-control mb-2" placeholder="CVV" maxlength="4" required>
+                </div>
+                <input type="text" class="form-control mb-2" placeholder="Name on Card" required>
+                <button type="submit" class="btn btn-success w-100">Pay Now</button>
+              </form>
+              <div class="payment-success text-success mt-2" style="display:none;font-weight:600;text-align:center;">Payment Successful!</div>
+            </div>
+          </div>
         </div>
       </div>
     </a>
   <% } %>
 </div>
+
+<!-- Surprise Me Button -->
+<button class="surprise-btn" id="surpriseBtn"><i class="fa-solid fa-bed"></i>  ! Bookings </button>
+
+<!-- Floating Help & Care Center Button (fully animated, matches site style) -->
+<button class="help-care-btn" id="helpCareBtn" title="Help & Care Center" aria-label="Help & Care Center">
+  <span class="help-btn-icon">
+    <i class="fa-solid fa-heart-circle-bolt"></i>
+    <span style="font-size:1.1rem;font-weight:600;margin-left:0.4em;letter-spacing:0.5px;">Help & Care Center</span>
+  </span>
+</button>
+
+<!-- Help & Care Center Modal (Animated) -->
+<div id="helpCareModal" class="help-modal-animated-bg" style="display:none;position:fixed;z-index:200;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.32);backdrop-filter:blur(2px);align-items:center;justify-content:center;">
+  <div class="help-modal-content animated-popIn">
+    <button onclick="closeHelpCareModal()" class="help-modal-close"><i class="fa-solid fa-xmark"></i></button>
+    <div class="help-modal-header">
+      <span class="help-modal-icon">
+        <i class="fa-solid fa-heart-circle-bolt"></i>
+      </span>
+      <h3>Help & Care Center</h3>
+      <p>How can we help you?</p>
+    </div>
+    <div class="help-modal-links">
+      <a href="/faq" class="help-link" data-href="/faq"><i class="fa-solid fa-question-circle"></i> FAQ</a>
+      <a href="/listings/booked" class="help-link" data-href="/listings/booked"><i class="fa-solid fa-suitcase-rolling"></i> My Booked Hotels</a>
+      <a href="/listings" class="help-link" data-href="/listings"><i class="fa-solid fa-hotel"></i> All Hotels</a>
+      <a href="mailto:support@wanderlust.com" target="_blank"><i class="fa-solid fa-envelope"></i> Email Support</a>
+      <a href="/privacy" class="help-link" data-href="/privacy"><i class="fa-solid fa-user-shield"></i> Privacy Policy</a>
+      <a href="/terms" class="help-link" data-href="/terms"><i class="fa-solid fa-file-contract"></i> Terms & Conditions</a>
+      <a href="https://wa.me/1234567890" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp Support</a>
+      <a href="tel:+1234567890"><i class="fa-solid fa-phone"></i> Call Support</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Help & Care Center modal/button logic
+  const helpBtn = document.getElementById('helpCareBtn');
+  const helpModal = document.getElementById('helpCareModal');
+  helpBtn.onclick = function() { helpModal.style.display = 'flex'; };
+  function closeHelpCareModal() { helpModal.style.display = 'none'; }
+  window.onclick = function(event) {
+    if(event.target === helpModal) helpModal.style.display = 'none';
+  };
+  // SPA-like navigation for help modal links (no full page reload)
+  document.querySelectorAll('.help-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const url = this.getAttribute('data-href');
+      if(url) {
+        fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            // Replace only the main content area, not the whole page
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const newContent = doc.querySelector('.row, .booked-list-row, main, #main-content');
+            const currentContent = document.querySelector('.row, .booked-list-row, main, #main-content');
+            if(newContent && currentContent) {
+              currentContent.innerHTML = newContent.innerHTML;
+              window.scrollTo({top: 0, behavior: 'smooth'});
+            } else {
+              // fallback: open in new tab
+              window.open(url, '_blank');
+            }
+          });
+        closeHelpCareModal();
+      }
+    });
+  });
+  // AJAX Book Now logic
+  document.querySelectorAll('.book-form').forEach(form => {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const btn = form.querySelector('button');
+      btn.classList.add('loading');
+      const listingId = form.getAttribute('data-listing-id');
+      fetch(`/listings/${listingId}/book`, {
+        method: 'POST',
+        headers: { 'X-Requested-With': 'XMLHttpRequest' },
+      })
+      .then(res => {
+        if(res.ok) {
+          btn.classList.remove('loading');
+          btn.disabled = true;
+          btn.querySelector('.btn-label').textContent = 'Booked!';
+        } else {
+          btn.classList.remove('loading');
+          alert('Failed to book.');
+        }
+      })
+      .catch(() => {
+        btn.classList.remove('loading');
+        alert('Failed to book.');
+      });
+    });
+  });
+  // Payment modal logic
+  document.querySelectorAll('.pay-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const listingId = btn.getAttribute('data-listing-id');
+      document.getElementById('paymentModal-' + listingId).style.display = 'flex';
+    });
+  });
+  document.querySelectorAll('.payment-form').forEach(form => {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const modal = form.closest('.payment-modal');
+      form.style.display = 'none';
+      modal.querySelector('.payment-success').style.display = 'block';
+      setTimeout(() => { modal.style.display = 'none'; form.style.display = ''; modal.querySelector('.payment-success').style.display = 'none'; }, 1800);
+    });
+  });
+  // Add ripple effect to Book Now and Pay Now buttons
+  function addRippleEffect(e) {
+    const btn = e.currentTarget;
+    const circle = document.createElement('span');
+    circle.className = 'ripple';
+    const rect = btn.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    circle.style.width = circle.style.height = size + 'px';
+    circle.style.left = (e.clientX - rect.left - size/2) + 'px';
+    circle.style.top = (e.clientY - rect.top - size/2) + 'px';
+    btn.appendChild(circle);
+    setTimeout(() => circle.remove(), 600);
+  }
+  document.querySelectorAll('.btn-animated-book, .pay-btn').forEach(btn => {
+    btn.addEventListener('click', addRippleEffect);
+  });
+</script>

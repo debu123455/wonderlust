@@ -11,6 +11,12 @@ const listingSchema = new Schema({
         type: String,
         default: ""
     },
+    images: [
+        {
+            url: String,
+            filename: String
+        }
+    ],
     image: {
         url:String,
         filename:String
