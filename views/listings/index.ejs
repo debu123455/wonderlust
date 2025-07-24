@@ -82,7 +82,7 @@
   .card-img-top {
     border-radius: 1.5rem 1.5rem 0 0;
     object-fit: cover;
-    width: 100%;
+    width: 120%;
     height: 20rem;
     transition: filter 0.2s;
     filter: brightness(0.98) saturate(1.08);
@@ -103,7 +103,8 @@
   .card-text b {
     font-size: 1.15rem;
     color: #fe424d;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.2px;
+    margin: auto;
   }
   .btn-success {
     background: linear-gradient(90deg, #fe424d 60%, #ffb86b 100%);
@@ -113,6 +114,16 @@
     border-radius: 1.2rem;
     box-shadow: 0 2px 8px #fe424d22;
     transition: background 0.2s, box-shadow 0.2s;
+    gap: 0.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.2rem;
+    font-size: 1.08rem;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 0.5px;
   }
   .btn-success:hover {
     background: linear-gradient(90deg, #d7373f 60%, #ffb86b 100%);
@@ -318,6 +329,23 @@
     transition: background 0.2s, box-shadow 0.2s, transform 0.18s;
     animation: popIn 0.7s cubic-bezier(0.23,1,0.32,1);
   }
+  .btn-animated-book {    
+    background: linear-gradient(90deg, #fe424d 60%, #ffb86b 100%);
+    color: #fff;
+
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    gap: 0.5em;
+    margin-left: 50%;
+    padding: 10px;
+
+
+
+
+  }
   .btn-animated-book:active, .pay-btn:active {
     animation: btnBounce 0.3s;
   }
@@ -345,15 +373,14 @@
   .btn-animated-book .btn-loader {
     display: block;
     border: 3px solid #fff;
-    border-top: 3px solid #fe424d;
     border-radius: 50%;
     width: 1.7em;
     height: 1.7em;
     position: absolute;
     left: 50%;
-    top: 100%;
+    top: 50%;
     margin-left: -0.85em;
-    margin-top: -0.85em;
+    margin-top: 0.85em;
     animation: spin 0.8s linear infinite;
     z-index: 3;
     background: transparent;
@@ -446,14 +473,16 @@
           <!-- Book & Pay Options Side-by-Side -->
           <div class="listing-actions-row">
             <form action="/listings/<%= listing._id %>/book" method="POST" class="animated-book-form book-form" data-listing-id="<%= listing._id %>">
-              <button class="btn btn-animated-book w-100" type="submit">
+              <button class="btn btn-animated-book " type="submit">
                 <span class="btn-bg"></span>
                 <span class="btn-icon"><i class="fa-solid fa-calendar-check"></i></span>
                 <span class="btn-label">Book Now</span>
                 <span class="btn-loader"></span>
               </button>
             </form>
-          
+            <!-- <button class="btn btn-warning pay-btn w-100" data-listing-id="<%= listing._id %>">
+              <i class="fa-solid fa-credit-card"></i> Pay Now
+            </button> -->
           </div>
           <!-- Payment Modal -->
           <div class="payment-modal" id="paymentModal-<%= listing._id %>" style="display:none;position:fixed;z-index:300;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.32);backdrop-filter:blur(2px);align-items:center;justify-content:center;">
@@ -490,7 +519,8 @@
 <!-- Floating Help & Care Center Button (fully animated, matches site style) -->
 <button class="help-care-btn" id="helpCareBtn" title="Help & Care Center" aria-label="Help & Care Center">
   <span class="help-btn-icon">
-    <span style="font-size:1rem;font-weight:60;margin-left:0.3em;letter-spacing:0.6px;">Help & Care </span>
+    <i class="fa-solid fa-heart"></i>
+    <span style="font-size:1rem;font-weight:60;margin-left:0.2em;letter-spacing:0.3px;">Help & Care </span>
   </span>
 </button>
 
@@ -502,7 +532,7 @@
       <span class="help-modal-icon">
         <i class="fa-solid fa-heart-circle-bolt"></i>
       </span>
-      <h3>Help & Care </h3>
+      <h3>Help & Care Center</h3>
       <p>How can we help you?</p>
     </div>
     <div class="help-modal-links">

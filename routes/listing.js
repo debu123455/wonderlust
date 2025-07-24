@@ -43,6 +43,7 @@ router.post('/:id/book', isLoggedIn, wrapasync(async (req, res) => {
 }));
 
 // Unbook a listing (remove from user's bookings)
+
 router.post('/:id/unbook', isLoggedIn, wrapasync(async (req, res) => {
     const listingId = req.params.id;
     const user = req.user;

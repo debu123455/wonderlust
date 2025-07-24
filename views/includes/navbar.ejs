@@ -282,7 +282,9 @@
         <% } %>
         <!-- Search and Sort in Navbar -->
         <form class="d-flex align-items-center ms-3" role="search" method="GET" action="/listings" style="gap:0.5rem;">
-          <input class="form-control search-inp" name="q" type="search" placeholder="Search destinations" style="width:160px;padding-left:2.2rem;" value="<%= typeof query !== 'undefined' && query.q ? query.q : '' %>" />
+          <input class="form-control search-inp" name="q" type="search" placeholder="Search " 
+          style="width:160px;padding-left:2.2rem;"
+           value="<%= typeof query !== 'undefined' && query.q ? query.q : '' %>" />
           <select name="sort" class="form-select" style="width:auto;display:inline-block;" onchange="this.form.submit()">
             <option value="">Sort by</option>
             <option value="price_asc" <%= (typeof query !== 'undefined' && query.sort === 'price_asc') ? 'selected' : '' %>>Price: Low to High</option>

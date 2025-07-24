@@ -48,7 +48,8 @@
       <img src="<%= (listing.image && listing.image.url) ? listing.image.url : '/default.jpg' %>" alt="listing_image">
       <div class="card-body">
         <b><%= listing.title %></b>
-        <div style="color:#fe424d;font-weight:600;">&#8377 <%= (listing.price !==null ? listing.price.toLocaleString("en-In") : 'N/A' ) %> /night</div>
+        <div style="color:#fe424d;font-weight:600;">&#8377 <%= (listing.price !==null ? listing.price.toLocaleString("en-In") : 'N/A' )
+         %> /night</div>
         <div style="font-size:0.95rem;color:#888;">in <%= listing.location %>, <%= listing.country %></div>
         <!-- Remove button -->
         <form action="/listings/<%= listing._id %>/unbook" method="POST" style="margin-top:1em;text-align:right;" class="unbook-form">
